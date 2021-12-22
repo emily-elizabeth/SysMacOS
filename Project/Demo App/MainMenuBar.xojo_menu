@@ -7,6 +7,29 @@ Begin Menu MainMenuBar
       AutoEnabled = True
       AutoEnable = True
       Visible = True
+      Begin DesktopMenuItem FileSave
+         SpecialMenu = 0
+         Index = -2147483648
+         Text = "Save"
+         ShortcutKey = "S"
+         Shortcut = "Cmd+S"
+         MenuModifier = True
+         AutoEnabled = True
+         AutoEnable = True
+         Visible = True
+      End
+      Begin DesktopMenuItem FileSaveAs
+         SpecialMenu = 0
+         Index = -2147483648
+         Text = "Save As"
+         ShortcutKey = "S"
+         Shortcut = "Cmd+Shift+S"
+         MenuModifier = True
+         AltMenuModifier = True
+         AutoEnabled = True
+         AutoEnable = True
+         Visible = True
+      End
       Begin DesktopQuitMenuItem FileQuit
          SpecialMenu = 0
          Index = -2147483648

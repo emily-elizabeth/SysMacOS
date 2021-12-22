@@ -135,9 +135,9 @@ Protected Module SysMacOS
 		      DIM deltaHeight As CGFloat = height - inWindow.Height
 		      
 		      DIM frameRect As NSRect = Frame(inWindow.Handle)
-		      frameRect.Height = frameRect.Height + deltaHeight
+		      frameRect.h = frameRect.h + deltaHeight
 		      frameRect.Y = frameRect.Y - deltaHeight
-		      frameRect.Width = frameRect.Width + deltaWidth
+		      frameRect.w = frameRect.w + deltaWidth
 		      
 		      SetFrameDisplayAnimate inWindow.Handle, frameRect, TRUE, TRUE
 		    end if
