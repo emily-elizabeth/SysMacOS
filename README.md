@@ -1,5 +1,5 @@
 # SysMacOS
- extends and system calls for macOS
+ system calls for macOS
 
 This replaces the older "macOS" extends that were originally on here.
 
