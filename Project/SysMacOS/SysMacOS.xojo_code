@@ -1,7 +1,38 @@
 #tag Module
 Protected Module SysMacOS
-	#tag Method, Flags = &h0
-		Function Icon(Extends file As FolderItem, iconSize As Integer = 32) As Picture
+	#tag Method, Flags = &h1
+		Protected Function BundleIdentifier() As Text
+		  Static returnValue As Text
+		  
+		  if (returnValue.Empty) then
+		    #if TargetCocoa
+		      Declare Function bundleIdentifier Lib "Cocoa" Selector "bundleIdentifier" (NSBundleRef As Ptr) As CFStringRef
+		      Declare Function mainBundle Lib "Cocoa" Selector "mainBundle" (NSBundleClass As Ptr) As Ptr
+		      Declare Function NSClassFromString Lib "Cocoa" (className As CFStringRef) As Ptr
+		      
+		      DIM NSBundleClass As Ptr = NSClassFromString("NSBundle")
+		      DIM NSBundleMainBundle As Ptr = mainBundle(NSBundleClass)
+		      
+		      returnValue = bundleIdentifier(NSBundleMainBundle)
+		      
+		      if (returnValue.Empty) then
+		        returnValue = App.ExecutableFile.Name.ToText  // bundle identifier wasn't set in the IDE
+		      end if
+		      
+		    #elseif TargetLinux
+		      returnValue = App.ExecutableFile.Name.ToText
+		      
+		    #elseif TargetWin32
+		      returnValue = App.ExecutableFile.Name.NthField(".exe", 1).ToText
+		    #endif
+		  end if
+		  
+		  Return returnValue
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function IconFromFile(file As FolderItem, iconSize As Integer = 32) As Picture
 		  #if TargetMacOS
 		    // copied from https://forum.xojo.com/t/get-picture-of-current-application-icon/25637/8
 		    
@@ -28,6 +59,15 @@ Protected Module SysMacOS
 		    Return p
 		  #endif
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub MenuSetAlternate(aMenuItem As DesktopMenuItem, value As Boolean)
+		  #if TargetCocoa
+		    Declare Sub SetAlternate_ Lib "Cocoa" Selector "setAlternate:" (aNSMenuItem As Ptr, value As Boolean)
+		    SetAlternate_ aMenuItem.Handle, value
+		  #endif
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
@@ -116,8 +156,8 @@ Protected Module SysMacOS
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub Resize(Extends inWindow as DesktopWindow, width as Integer, height as Integer)
+	#tag Method, Flags = &h1
+		Protected Sub WindowResizeAnimated(inWindow as DesktopWindow, width as Integer, height as Integer)
 		  #if TargetCocoa
 		    // If you copy this method, you will need the following structure: NSRect
 		    
@@ -145,15 +185,6 @@ Protected Module SysMacOS
 		  #else
 		    me.Width = width
 		    me.Height = height
-		  #endif
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetAlternate(Extends aMenuItem As DesktopMenuItem, Assigns value As Boolean)
-		  #if TargetCocoa
-		    Declare Sub SetAlternate_ Lib "Cocoa" Selector "setAlternate:" (aNSMenuItem As Ptr, value As Boolean)
-		    SetAlternate_ aMenuItem.Handle, value
 		  #endif
 		End Sub
 	#tag EndMethod
