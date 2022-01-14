@@ -320,7 +320,7 @@ Begin DesktopWindow Window1
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   4
+         TabIndex        =   1
          TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
@@ -362,7 +362,7 @@ Begin DesktopWindow Window1
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   3
+         TabIndex        =   2
          TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
@@ -404,7 +404,7 @@ Begin DesktopWindow Window1
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   2
+         TabIndex        =   3
          TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
@@ -478,7 +478,7 @@ Begin DesktopWindow Window1
          Password        =   False
          ReadOnly        =   False
          Scope           =   2
-         TabIndex        =   1
+         TabIndex        =   4
          TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
@@ -631,7 +631,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  FileSaveAs.SetAlternate = TRUE
+		  SysMacOS.MenuSetAlternate FileSaveAs, TRUE
 		End Sub
 	#tag EndEvent
 
@@ -656,7 +656,7 @@ End
 		Sub Pressed()
 		  DIM f As FolderItem = FolderItem.ShowOpenFileDialog("????")
 		  
-		  DIM p As Picture = f.Icon(self.iconSize.SelectedRowValue.ToInteger)
+		  DIM p As Picture = SysMacOS.IconFromFile(f, self.iconSize.SelectedRowValue.ToInteger)
 		  self.Canvas1.Backdrop = p
 		End Sub
 	#tag EndEvent
