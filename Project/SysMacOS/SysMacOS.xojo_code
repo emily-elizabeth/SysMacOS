@@ -157,6 +157,16 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Sub WindowCenter(aWindow As DesktopWindow)
+		  // Sets the window’s location to the center of the screen.
+		  #if TargetCocoa
+		    soft declare sub center lib "Cocoa" selector "center" (WindowRef As Ptr)
+		    center aWindow.Handle
+		  #endif
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub WindowResizeAnimated(inWindow as DesktopWindow, width as Integer, height as Integer)
 		  #if TargetCocoa
 		    // If you copy this method, you will need the following structure: NSRect

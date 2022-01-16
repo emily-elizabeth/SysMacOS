@@ -625,6 +625,38 @@ Begin DesktopWindow Window1
       Visible         =   True
       Width           =   102
    End
+   Begin DesktopButton WindowCenter
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "WindowCenter"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   392
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   134
+   End
 End
 #tag EndDesktopWindow
 
@@ -681,6 +713,13 @@ End
 		  SysMacOS.PostUserNotification self.NotificationTitle.Text, _
 		  self.NotificationSubtitle.Text, self.NotificationInformativeText.Text, Nil, _
 		  self.NotificationIdentifier.Text
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WindowCenter
+	#tag Event
+		Sub Pressed()
+		  SysMacOS.WindowCenter self
 		End Sub
 	#tag EndEvent
 #tag EndEvents
