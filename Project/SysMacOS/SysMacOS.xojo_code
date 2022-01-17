@@ -179,11 +179,11 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Sub WindowHasShadow(aWindow As DesktopWindow, Value As Boolean)
+		Protected Sub WindowHasShadow(aWindow As DesktopWindow, value As Boolean)
 		  // Specifies whether the window has a shadow.
 		  #if TargetCocoa
 		    soft declare sub setHasShadow lib "Cocoa" selector "setHasShadow:" (WindowRef As Ptr, inFlag As Boolean)
-		    setHasShadow aWindow.Handle, Value
+		    setHasShadow aWindow.Handle, value
 		  #endif
 		  
 		  // posted
@@ -203,14 +203,34 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Sub WindowHidesOnDeactivate(aWindow As DesktopWindow, Value As Boolean)
+		Protected Sub WindowHidesOnDeactivate(aWindow As DesktopWindow, value As Boolean)
 		  // Specifies whether the window is removed from the screen when the application is inactive.
 		  #if TargetCocoa
 		    soft declare sub setHidesOnDeactivate lib "Cocoa" selector "setHidesOnDeactivate:" (WindowRef As Ptr, inFlag As Boolean)
-		    setHidesOnDeactivate aWindow.Handle, Value
+		    setHidesOnDeactivate aWindow.Handle, value
 		  #endif
 		  
 		  // posted
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function WindowIsMovable(aWindow As DesktopWindow) As Boolean
+		  // Indicates whether the window can be moved by clicking in its title bar or background.
+		  #if TargetCocoa
+		    soft declare function isMovable lib "Cocoa" selector "isMovable" (WindowRef As Ptr) As Boolean
+		    return isMovable(aWindow.Handle)
+		  #endif
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub WindowIsMovable(aWindow As DesktopWindow, value As Boolean)
+		  // Specifies whether the window can be dragged by clicking in its title bar or background.
+		  #if TargetCocoa
+		    soft declare sub setMovable lib "Cocoa" selector "setMovable:" (WindowRef As Ptr, inFlag As Boolean)
+		    setMovable aWindow.Handle, value
+		  #endif
 		End Sub
 	#tag EndMethod
 

@@ -17,8 +17,8 @@ Begin DesktopWindow Window1
    MaximumWidth    =   32000
    MenuBar         =   1316753407
    MenuBarVisible  =   False
-   MinimumHeight   =   64
-   MinimumWidth    =   64
+   MinimumHeight   =   570
+   MinimumWidth    =   776
    Resizeable      =   True
    Title           =   "Untitled"
    Type            =   0
@@ -719,6 +719,37 @@ Begin DesktopWindow Window1
       Visible         =   True
       Width           =   322
    End
+   Begin DesktopButton WindowIsMovable
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "WindowIsMovable"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   166
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   2
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   456
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   176
+   End
 End
 #tag EndDesktopWindow
 
@@ -796,6 +827,13 @@ End
 	#tag Event
 		Sub Pressed()
 		  SysMacOS.WindowHidesOnDeactivate self, NOT SysMacOS.WindowHidesOnDeactivate(self)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WindowIsMovable
+	#tag Event
+		Sub Pressed()
+		  SysMacOS.WindowIsMovable self, NOT SysMacOS.WindowIsMovable(self)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
