@@ -167,6 +167,30 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function WindowHasShadow(aWindow As DesktopWindow) As Boolean
+		  // Indicates whether the window has a shadow.
+		  #if TargetCocoa
+		    soft declare function hasShadow lib "Cocoa" selector "hasShadow" (WindowRef As Ptr) As Boolean
+		    return hasShadow(aWindow.Handle)
+		  #endif
+		  
+		  // posted
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub WindowHasShadow(aWindow As DesktopWindow, Value As Boolean)
+		  // Specifies whether the window has a shadow.
+		  #if TargetCocoa
+		    soft declare sub setHasShadow lib "Cocoa" selector "setHasShadow:" (WindowRef As Ptr, inFlag As Boolean)
+		    setHasShadow aWindow.Handle, Value
+		  #endif
+		  
+		  // posted
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub WindowResizeAnimated(inWindow as DesktopWindow, width as Integer, height as Integer)
 		  #if TargetCocoa
 		    // If you copy this method, you will need the following structure: NSRect
