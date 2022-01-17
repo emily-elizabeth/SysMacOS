@@ -235,6 +235,26 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function WindowMiniwindowTitle(aWindow As DesktopWindow) As String
+		  // Returns the title displayed in the window’s minimized window.
+		  #if TargetCocoa
+		    soft declare function miniwindowTitle lib "Cocoa" selector "miniwindowTitle" (WindowRef As Ptr) As CFStringRef
+		    return miniwindowTitle(aWindow.Handle)
+		  #endif
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub WindowMiniwindowTitle(aWindow As DesktopWindow, title As String)
+		  // Sets the title of the window’s miniaturized counterpart to a given string and redisplays it.
+		  #if TargetCocoa
+		    soft declare sub setMiniwindowTitle lib "Cocoa" selector "setMiniwindowTitle:" (WindowRef As Ptr, inTitle As CFStringRef)
+		    setMiniwindowTitle aWindow.Handle, title
+		  #endif
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub WindowResizeAnimated(inWindow as DesktopWindow, width as Integer, height as Integer)
 		  #if TargetCocoa
 		    // If you copy this method, you will need the following structure: NSRect

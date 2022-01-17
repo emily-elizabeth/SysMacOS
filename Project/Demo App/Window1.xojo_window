@@ -750,6 +750,37 @@ Begin DesktopWindow Window1
       Visible         =   True
       Width           =   176
    End
+   Begin DesktopButton WindowMiniwindowTitle
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "WindowMiniwindowTitle"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   2
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   488
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   322
+   End
 End
 #tag EndDesktopWindow
 
@@ -834,6 +865,13 @@ End
 	#tag Event
 		Sub Pressed()
 		  SysMacOS.WindowIsMovable self, NOT SysMacOS.WindowIsMovable(self)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WindowMiniwindowTitle
+	#tag Event
+		Sub Pressed()
+		  SysMacOS.WindowMiniwindowTitle self, "This window is in the dock."
 		End Sub
 	#tag EndEvent
 #tag EndEvents
