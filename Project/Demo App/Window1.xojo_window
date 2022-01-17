@@ -646,7 +646,7 @@ Begin DesktopWindow Window1
       LockRight       =   False
       LockTop         =   True
       MacButtonStyle  =   0
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
@@ -677,7 +677,7 @@ Begin DesktopWindow Window1
       LockRight       =   False
       LockTop         =   True
       MacButtonStyle  =   0
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
@@ -687,6 +687,37 @@ Begin DesktopWindow Window1
       Underline       =   False
       Visible         =   True
       Width           =   176
+   End
+   Begin DesktopButton WindowHidesOnDeactivate
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "WindowHidesOnDeactivate"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   2
+      TabIndex        =   9
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   424
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   322
    End
 End
 #tag EndDesktopWindow
@@ -758,6 +789,13 @@ End
 	#tag Event
 		Sub Pressed()
 		  SysMacOS.WindowHasShadow self, NOT SysMacOS.WindowHasShadow(self)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events WindowHidesOnDeactivate
+	#tag Event
+		Sub Pressed()
+		  SysMacOS.WindowHidesOnDeactivate self, NOT SysMacOS.WindowHidesOnDeactivate(self)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

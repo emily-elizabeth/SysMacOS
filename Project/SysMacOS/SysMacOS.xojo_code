@@ -191,6 +191,30 @@ Protected Module SysMacOS
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function WindowHidesOnDeactivate(aWindow As DesktopWindow) As Boolean
+		  // Indicates whether the window is removed from the screen when its application becomes inactive.
+		  #if TargetCocoa
+		    soft declare function hidesOnDeactivate lib "Cocoa" selector "hidesOnDeactivate" (WindowRef As Ptr) As Boolean
+		    return hidesOnDeactivate(aWindow.Handle)
+		  #endif
+		  
+		  // posted
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub WindowHidesOnDeactivate(aWindow As DesktopWindow, Value As Boolean)
+		  // Specifies whether the window is removed from the screen when the application is inactive.
+		  #if TargetCocoa
+		    soft declare sub setHidesOnDeactivate lib "Cocoa" selector "setHidesOnDeactivate:" (WindowRef As Ptr, inFlag As Boolean)
+		    setHidesOnDeactivate aWindow.Handle, Value
+		  #endif
+		  
+		  // posted
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub WindowResizeAnimated(inWindow as DesktopWindow, width as Integer, height as Integer)
 		  #if TargetCocoa
 		    // If you copy this method, you will need the following structure: NSRect
