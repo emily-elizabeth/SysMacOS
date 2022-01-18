@@ -1,10 +1,10 @@
 #tag Module
 Protected Module SysMacOS
 	#tag Method, Flags = &h1
-		Protected Function BundleIdentifier() As Text
-		  Static returnValue As Text
+		Protected Function BundleIdentifier() As String
+		  Static returnValue As String
 		  
-		  if (returnValue.Empty) then
+		  if (returnValue.IsEmpty) then
 		    #if TargetCocoa
 		      Declare Function bundleIdentifier Lib "Cocoa" Selector "bundleIdentifier" (NSBundleRef As Ptr) As CFStringRef
 		      Declare Function mainBundle Lib "Cocoa" Selector "mainBundle" (NSBundleClass As Ptr) As Ptr
@@ -15,15 +15,15 @@ Protected Module SysMacOS
 		      
 		      returnValue = bundleIdentifier(NSBundleMainBundle)
 		      
-		      if (returnValue.Empty) then
-		        returnValue = App.ExecutableFile.Name.ToText  // bundle identifier wasn't set in the IDE
+		      if (returnValue.IsEmpty) then
+		        returnValue = App.ExecutableFile.Name  // bundle identifier wasn't set in the IDE
 		      end if
 		      
 		    #elseif TargetLinux
-		      returnValue = App.ExecutableFile.Name.ToText
+		      returnValue = App.ExecutableFile.Name
 		      
 		    #elseif TargetWin32
-		      returnValue = App.ExecutableFile.Name.NthField(".exe", 1).ToText
+		      returnValue = App.ExecutableFile.Name.NthField(".exe", 1)
 		    #endif
 		  end if
 		  
